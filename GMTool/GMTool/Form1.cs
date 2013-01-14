@@ -18,26 +18,11 @@ namespace GMTool
         private NotifyIcon  sysTrayIcon; 
         private ContextMenu sysTrayMenu;
         Timer timer = new Timer();
-        int lastTicketID = 0;
+        Int32 lastTicketID = 0;
 
         public frmLogin()
         {
             InitializeComponent();
-
-            //Create Context Menu for system tray.
-            sysTrayMenu = new ContextMenu();
-            sysTrayMenu.MenuItems.Add("Check for new tickets...", OnRefresh);
-            sysTrayMenu.MenuItems.Add("Quit", OnExit);
-
-            sysTrayIcon = new NotifyIcon();
-            sysTrayIcon.Text = "GM Tool";
-            sysTrayIcon.Icon = Properties.Resources.Tray;
-            
-            // Add menu to tray icon and show it. 
-            sysTrayIcon.ContextMenu = sysTrayMenu;
-            sysTrayIcon.Visible = true;
-            sysTrayIcon.BalloonTipClicked += new EventHandler(sysTrayIcon_BaloonTipClicked);
-            sysTrayIcon.ShowBalloonTip(5000, "GM Tool", "Tray Monitor Active", ToolTipIcon.None);
 
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = (1000) * (60); // Tick every minute
@@ -61,7 +46,7 @@ namespace GMTool
 
         void sysTrayIcon_BaloonTipClicked(Object sender, EventArgs e)
         {
-            MessageBox.Show("you clicked the button");
+            // Nothing yet, possibly show all the tickets.
         }
 
         void timer_Tick(Object sender, EventArgs e)
@@ -94,10 +79,17 @@ namespace GMTool
                 if (match.Success)
                 {
                     Console.WriteLine("ID:" + match.Groups["id"].Value + " Name:" + match.Groups["name"].Value);
-                }   
+                    if (Int32.Parse(match.Groups["id"].Value) != lastTicketID)
+                    {
+                        string tmp = "ID: " + match.Groups["id"].Value + "\n" +
+                                        "Name: " + match.Groups["name"].Value + "\n" +
+                                        "Message: " + match.Groups["message"].Value + "\n" +
+                                        "Assigned To: " + match.Groups["assignedTo"].Value + "\n";
 
-                
-                //sysTrayIcon.ShowBalloonTip(5000, "GM Tool", tmp, ToolTipIcon.None);
+                        sysTrayIcon.ShowBalloonTip(5000, "NEW TICKET", tmp, ToolTipIcon.None);
+                        lastTicketID = Int32.Parse(match.Groups["id"].Value);
+                    }
+                }   
             }
         }
     
@@ -113,6 +105,22 @@ namespace GMTool
                 Program.SetHash(response);
                 MessageBox.Show("Successfully Logged In", "Response", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 this.Visible = false;
+
+                //Create Context Menu for system tray.
+                sysTrayMenu = new ContextMenu();
+                sysTrayMenu.MenuItems.Add("Check for new tickets...", OnRefresh);
+                sysTrayMenu.MenuItems.Add("Quit", OnExit);
+
+                sysTrayIcon = new NotifyIcon();
+                sysTrayIcon.Text = "GM Tool";
+                sysTrayIcon.Icon = Properties.Resources.Tray;
+
+                // Add menu to tray icon and show it. 
+                sysTrayIcon.ContextMenu = sysTrayMenu;
+                sysTrayIcon.Visible = true;
+                sysTrayIcon.BalloonTipClicked += new EventHandler(sysTrayIcon_BaloonTipClicked);
+                sysTrayIcon.ShowBalloonTip(5000, "GM Tool", "Tray Monitor Active", ToolTipIcon.None);
+
                 timer.Start();
             }
         }

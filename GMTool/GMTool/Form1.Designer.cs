@@ -108,6 +108,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GMTool Login";
             this.ResumeLayout(false);
             this.PerformLayout();
