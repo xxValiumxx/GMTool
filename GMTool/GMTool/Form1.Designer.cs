@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -39,7 +40,7 @@
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(105, 43);
+            this.lblUsername.Location = new System.Drawing.Point(36, 23);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(55, 13);
             this.lblUsername.TabIndex = 0;
@@ -48,7 +49,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(105, 85);
+            this.lblPassword.Location = new System.Drawing.Point(36, 65);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(53, 13);
             this.lblPassword.TabIndex = 1;
@@ -56,14 +57,14 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(105, 59);
+            this.txtUsername.Location = new System.Drawing.Point(36, 39);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(160, 20);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(108, 101);
+            this.txtPassword.Location = new System.Drawing.Point(39, 81);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(157, 20);
@@ -73,7 +74,7 @@
             // chkRememberLogin
             // 
             this.chkRememberLogin.AutoSize = true;
-            this.chkRememberLogin.Location = new System.Drawing.Point(108, 128);
+            this.chkRememberLogin.Location = new System.Drawing.Point(39, 108);
             this.chkRememberLogin.Name = "chkRememberLogin";
             this.chkRememberLogin.Size = new System.Drawing.Size(77, 17);
             this.chkRememberLogin.TabIndex = 4;
@@ -82,7 +83,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(194, 128);
+            this.btnLogin.Location = new System.Drawing.Point(125, 108);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(71, 23);
             this.btnLogin.TabIndex = 5;
@@ -92,9 +93,10 @@
             // 
             // frmLogin
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 231);
+            this.ClientSize = new System.Drawing.Size(231, 164);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.chkRememberLogin);
             this.Controls.Add(this.txtPassword);
@@ -102,6 +104,9 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmLogin";
             this.Text = "GMTool Login";
             this.ResumeLayout(false);

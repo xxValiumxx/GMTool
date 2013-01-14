@@ -22,6 +22,7 @@ namespace GMTool
         public string HttpPost(string URI, string Parameters)
         {
             HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(URI);
+            req.KeepAlive = false;
             req.CookieContainer = this.cookieJar;
             //req.Proxy = new System.Net.WebProxy(ProxyString, true);
             //Add these, as we're doing a POST
